@@ -1,0 +1,26 @@
+{
+  "name": "x402-file-upload",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-03-12",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "vars": {
+    "SERVER_ADDRESS": "0x34D3eD2c5Fc6D6A0F25d1Aad77193a8AA88A52b5"
+  },
+  "r2_buckets": [
+    {
+      "binding": "FILES",
+      "bucket_name": "x402-temp-files"
+    }
+  ],
+  "triggers": {
+    "crons": ["0 * * * *"]
+  },
+  "routes": [
+    {
+      "pattern": "files.camelai.io",
+      "custom_domain": true
+    }
+  ]
+}
