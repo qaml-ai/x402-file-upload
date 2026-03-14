@@ -1,13 +1,17 @@
 import { Hono } from "hono";
 import { cdpPaymentMiddleware } from "x402-cdp";
+import { stripeApiKeyMiddleware } from "x402-stripe";
 
 const MAX_FILE_SIZE = 100 * 1024 * 1024; // 100MB
 const DEFAULT_TTL = 3600; // 1 hour
 
 const app = new Hono<{ Bindings: Env }>();
 
-app.use(
-  cdpPaymentMiddleware(
+app.use(stripeApiKeyMiddleware({ serviceName: "file-upload" }));
+
+app.use(async (c, next) => {
+  if (c.get("skipX402")) return next();
+  return cdpPaymentMiddleware(
     (env) => ({
       "POST /": {
         accepts: [
@@ -51,8 +55,8 @@ app.use(
         },
       },
     })
-  )
-);
+  )(c, next);
+});
 
 /** HMAC-sign a message with the signing secret */
 async function sign(secret: string, message: string): Promise<string> {

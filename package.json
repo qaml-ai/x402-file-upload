@@ -8,7 +8,8 @@
   },
   "dependencies": {
     "hono": "^4.12.7",
-    "x402-cdp": "file:../x402-cdp"
+    "x402-cdp": "file:../x402-cdp",
+    "x402-stripe": "file:../x402-stripe"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250312.0",
