@@ -15,12 +15,9 @@ app.use(async (c, next) => {
     (env) => ({
       "POST /": {
         accepts: [
-          {
-            scheme: "exact",
-            price: "$0.001",
-            network: "eip155:8453",
-            payTo: env.SERVER_ADDRESS as `0x${string}`,
-          },
+          { scheme: "exact", price: "$0.001", network: "eip155:8453", payTo: env.SERVER_ADDRESS as `0x${string}` },
+      { scheme: "exact" as const, price: "$0.001", network: "eip155:137", payTo: env.SERVER_ADDRESS as `0x${string}` },
+      { scheme: "exact" as const, price: "$0.001", network: "solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp", payTo: "CvraJ4avKPpJNLvMhMH5ip2ihdt85PXvDwfzXdziUxRq" },
         ],
         description:
           "Upload a file and get a temporary signed URL. Send raw file body with Content-Type header. Returns a URL valid for 1 hour.",
