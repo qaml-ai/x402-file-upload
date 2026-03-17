@@ -166,12 +166,26 @@ app.get("/:id", async (c) => {
 
 // Info endpoint (free)
 app.get("/", (c) => {
-  return c.json({
-    service: "x402-file-upload",
-    description:
-      "Upload files and get temporary signed URLs. POST raw file body with Content-Type header. URLs expire after 1 hour.",
-    price: "$0.001 per upload (Base mainnet)",
-    maxFileSize: "100MB",
+  return new Response(`# files.camelai.io — File Upload
+
+Upload files and get temporary signed URLs (1hr).
+
+Part of [camelai.io](https://camelai.io).
+
+## API
+
+\`POST /\` — $0.001 per request
+
+**Body:** POST raw file body with \`Content-Type\` header
+
+**Response:** JSON with signed URL
+
+## Payment
+
+Accepts USDC on Base, Polygon, or Solana via x402. Or use a Stripe API key (\`Authorization: Bearer sk_camel_...\`).
+
+See [camelai.io](https://camelai.io) for payment setup and full service list.`, {
+    headers: { "Content-Type": "text/markdown; charset=utf-8" },
   });
 });
 
